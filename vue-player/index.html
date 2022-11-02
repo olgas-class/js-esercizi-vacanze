@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Vue JS -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Playlist section -->
+      <section>
+        <h2>Your playlist</h2>
+        <ul>
+          <li v-for="(song, index) in songs">
+            <div @click="toggleActiveSong(index)">
+              <h4>{{song.name}}</h4>
+              <p>{{ song.singer}}</p>
+              <p>{{song.genre}}</p>
+            </div>
+            <div>
+              <p>{{ song.duration }}</p>
+              <i v-if="activeSong === index" class="fa-solid fa-play"></i>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <!-- Form section -->
+      <section>
+        <h2>Insert new song</h2>
+        <div>
+          <label for="song-name">Song name</label>
+          <input type="text" id="song-name" v-model.trim="newSong.name" />
+        </div>
+        <div>
+          <label for="singer">Singer</label>
+          <input type="text" id="singer" v-model.trim="newSong.singer" />
+        </div>
+        <div>
+          <label for="genre">Genre</label>
+          <select id="genre" v-model.trim="newSong.genre">
+            <option value=""></option>
+            <option value="rock">Rock</option>
+            <option value="pop">Pop</option>
+            <option value="jazz">Jazz</option>
+          </select>
+        </div>
+        <div>
+          <label for="duration">Duration</label>
+          <input type="text" id="duration" v-model.trim="newSong.duration" />
+        </div>
+        <button @click="addNewSong">Add</button>
+        <small v-if="error">You have to insert all values</small>
+      </section>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
